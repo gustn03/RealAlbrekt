@@ -21,20 +21,44 @@ namespace RealAlbrekt
         };
 
         private bool isAlive;
-        private Random generator;
+        private Random generator = new Random();
         public string name;
         public void feed(){
-            hunger = hunger-3;
+            hunger = hunger-2;
             if (hunger < 0){
                 hunger = 0;
 
             } 
         }
         public void Hi(){
-            Console.WriteLine(name,": Hello!");
+            int word = generator.Next(0,words.Count);
+            Console.WriteLine(words[word]);
+            ReduceBoredom();
         }
         public void Teach(){
-            Console.WriteLine();
+            Console.WriteLine("What would you like to teach ", name, "?");
+            string svar = Console.ReadLine();
+            words.Add(svar);
+            ReduceBoredom();
+        }
+        public void Tick(){
+            hunger++;
+            boredom++;
+            if (hunger > 10 || boredom > 10){
+                isAlive = false;
+            }
+        }
+        public void PrintStats(){
+            Console.WriteLine("Hunger:", hunger);
+            Console.WriteLine("Bordeom:", boredom);
+        }
+        public bool GetAlive;
+
+        private void ReduceBoredom(){
+            boredom = boredom-2;
+            if (boredom < 0){
+                boredom = 0;
+            }
         }
 
     }
