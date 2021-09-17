@@ -5,8 +5,8 @@ namespace RealAlbrekt
 {
     public class character
     {
-        private int hunger;
-        private int boredom;
+        private int hunger = 0;
+        private int boredom = 0;
         private List<string> words  = new List<string>(){
             "4",
             "Dates",
@@ -20,7 +20,7 @@ namespace RealAlbrekt
             "#ADAM"
         };
 
-        private bool isAlive;
+        private bool isAlive = true;
         private Random generator = new Random();
         public string name;
         public void feed(){
@@ -32,11 +32,11 @@ namespace RealAlbrekt
         }
         public void Hi(){
             int word = generator.Next(0,words.Count);
-            Console.WriteLine(words[word]);
+            Console.WriteLine($"{name}: {words[word]}");
             ReduceBoredom();
         }
         public void Teach(){
-            Console.WriteLine("What would you like to teach ", name, "?");
+            Console.WriteLine($"What would you like to teach {name}?");
             string svar = Console.ReadLine();
             words.Add(svar);
             ReduceBoredom();
@@ -49,10 +49,13 @@ namespace RealAlbrekt
             }
         }
         public void PrintStats(){
-            Console.WriteLine("Hunger:", hunger);
-            Console.WriteLine("Bordeom:", boredom);
+            Console.WriteLine($"Hunger: {hunger}");
+            Console.WriteLine($"Bordeom: {boredom}");
         }
-        public bool GetAlive;
+        public bool GetAlive()
+        {
+            return isAlive;
+        }
 
         private void ReduceBoredom(){
             boredom = boredom-2;
